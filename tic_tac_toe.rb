@@ -1,3 +1,15 @@
-def grid
-  grid = Array.new(3) {Array.new(3) {"_"}}
+class Tictacboard
+  attr_accessor :grid
+
+  def initialize (grid)
+      @grid = grid        
+  end
+
+  def cell_checker(x,y)
+      @grid[x][y]
+  end
+
+  def x_player_mark(x,y)
+      @grid[x][y] = "X"
+  end
 end
