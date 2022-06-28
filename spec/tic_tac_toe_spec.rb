@@ -92,16 +92,10 @@ describe 'GAME-OVER' do
         board=Tictacboard.new(["O", "O", "O", "X", 5, 6, "X", 8, 9])
         expect{board_state_checker(board)}.to output("Player O wins!").to_stdout
     end
-end
 
-=begin
-    win conditions:
-        [0][1][2]
-        [4][5][6]
-        [7][8][9]
-        [0][4][7]
-        [1][5][8]
-        [2][6][9]
-        [0][5][9]
-        [2][5][7]
-=end
+    it 'knows when the board is full without a win' do
+        board=Tictacboard.new(["X", "X", "O", "O", "O", "X", "X", "X", "O"])
+        expect{board_state_checker(board)}.to output("It's a tie :(").to_stdout
+    end
+end     
+

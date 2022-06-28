@@ -48,6 +48,7 @@ $win_conditions = [
 ]
 
 def board_state_checker(board)
+  tie_flag = false
   $win_conditions.each { |win_combo|
   
     pos_1 = board.grid[win_combo[0]]
@@ -56,6 +57,12 @@ def board_state_checker(board)
 
     if [pos_1, pos_2, pos_3].uniq.count == 1 
        print "Player #{pos_1} wins!"
+    elsif turn_count(board) == 9
+        tie_flag = true
     end
+    
    } 
+   if tie_flag 
+      print "It's a tie :(" 
+   end
 end
