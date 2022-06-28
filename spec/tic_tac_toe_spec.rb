@@ -34,3 +34,23 @@ describe 'x_player_mark' do
         expect{board.x_player_mark(0,0)}.to output("Don't be silly! This square is taken.").to_stdout
     end
 end 
+
+describe 'O_player_mark' do
+    it 'can put an O in a cell' do
+        board=Tictacboard.new()
+        board.o_player_mark(0,1)
+        expect(board.grid[0][1]).to eq("O")
+        puts board.grid
+    end
+
+    it 'can only put an X in an unplayed cell' do
+        board=Tictacboard.new([["X", 2, 3],[4, 5, 6],[7, 8, 9]])
+        board.o_player_mark(0,0)
+        expect(board.grid[0][0]).to eq("X")
+    end
+
+    it 'shouts when you play a played cell' do
+        board=Tictacboard.new([["X", 2, 3],[4, 5, 6],[7, 8, 9]])
+        expect{board.o_player_mark(0,0)}.to output("Don't be silly! This square is taken.").to_stdout
+    end
+end 

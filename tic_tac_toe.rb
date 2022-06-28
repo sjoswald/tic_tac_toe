@@ -16,4 +16,12 @@ class Tictacboard
         print "Don't be silly! This square is taken."
       end
   end
+
+  def o_player_mark(x,y)
+    unless @grid[x][y] == "X" || @grid[x][y] == "O"
+      @grid[x][y] = "O"  
+    else
+      print "Don't be silly! This square is taken."
+    end  
+  end
 end
