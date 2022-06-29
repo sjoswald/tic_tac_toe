@@ -13,7 +13,7 @@ class Tictacboard
     unless @grid[position-1] == "X" || @grid[position-1] == "O"
       @grid[position-1] = player
     else
-      print "Don't be silly! This square is taken."
+      print "Don't be silly! This square is taken.\n"
     end
   end
 end
@@ -48,14 +48,14 @@ def board_state_checker(board)
     pos_3 = board.grid[win_combo[2]]
 
     if [pos_1, pos_2, pos_3].uniq.count == 1 
-       print "Player #{pos_1} wins!"
+       print "Player #{pos_1} wins!\n"
     elsif turn_count(board) == 9
         tie_flag = true
     end
     
    } 
    if tie_flag 
-      print "It's a tie :(" 
+      print "It's a tie :(\n" 
    end
 end
 
@@ -64,5 +64,9 @@ def current_player(board)
 end
 
 def display(board)
-  puts "#{board.grid[0]} | #{board.grid[1]} | #{board.grid[2]} | #{board.grid[3]} | #{board.grid[4]} | #{board.grid[5]} | #{board.grid[6]} | #{board.grid[7]} | #{board.grid[8]}"
+  puts "\n #{board.grid[0]} | #{board.grid[1]} | #{board.grid[2]}"
+  puts " ---------"
+  puts " #{board.grid[3]} | #{board.grid[4]} | #{board.grid[5]}"
+  puts " ---------"
+  puts " #{board.grid[6]} | #{board.grid[7]} | #{board.grid[8]}"
 end
