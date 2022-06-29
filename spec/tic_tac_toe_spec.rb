@@ -15,43 +15,44 @@ describe 'cell_checker' do
     end
 end
 
-describe 'x_player_mark' do
+describe 'X player actions' do
+
     it 'can put an X in a cell' do
         board=Tictacboard.new()
-        board.x_player_mark(1)
+        board.player_mark(1, "X")
         expect(board.grid[0]).to eq("X")
         puts board.grid
     end
 
     it 'can only put an X in an unplayed cell' do
         board=Tictacboard.new(["O", 2, 3, 4, 5, 6, 7, 8, 9])
-        board.x_player_mark(1)
+        board.player_mark(1, "O")
         expect(board.grid[0]).to eq("O")
     end
 
     it 'shouts when you play a played cell' do
         board=Tictacboard.new(["O", 2, 3, 4, 5, 6, 7, 8, 9])
-        expect{board.x_player_mark(1)}.to output("Don't be silly! This square is taken.").to_stdout
+        expect{board.player_mark(1, "X")}.to output("Don't be silly! This square is taken.").to_stdout
     end
 end 
 
-describe 'o_player_mark' do
+describe 'O player actions' do
     it 'can put an O in a cell' do
         board=Tictacboard.new()
-        board.o_player_mark(1)
+        board.player_mark(1, "O")
         expect(board.grid[0]).to eq("O")
         puts board.grid
     end
 
     it 'can only put an O in an unplayed cell' do
         board=Tictacboard.new(["X", 2, 3, 4, 5, 6, 7, 8, 9])
-        board.o_player_mark(1)
+        board.player_mark(1, "O")
         expect(board.grid[0]).to eq("X")
     end
 
     it 'shouts when you play a played cell' do
         board=Tictacboard.new(["X", 2, 3, 4, 5, 6, 7, 8, 9])
-        expect{board.o_player_mark(1)}.to output("Don't be silly! This square is taken.").to_stdout
+        expect{board.player_mark(1, "O")}.to output("Don't be silly! This square is taken.").to_stdout
     end
 end 
 
@@ -99,3 +100,33 @@ describe 'GAME-OVER' do
     end
 end     
 
+describe 'taking turns' do
+    it 'can produce next player symbol' do
+        board=Tictacboard.new()
+        expect(current_player(board)).to eq("X")
+    end
+
+    it 'can produce next player symbol' do
+        board=Tictacboard.new(["O", "X", "X", "O", 5, 6, 7, 8, 9])
+        expect(current_player(board)).to eq("X")
+    end
+
+    it 'can produce next player symbol' do
+        board=Tictacboard.new(["O", "X", "X", "O", 5, 6, "X", 8, 9])
+        expect(current_player(board)).to eq("O")
+    end
+end
+
+describe 'displays the board!' do
+    it 'prints the empty grid to the console' do
+        board=Tictacboard.new()
+        expect{display(board)}.to output("1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9\n").to_stdout
+    end
+end
+
+# board_view = 
+# " 1 | 2 | 3 
+#   ---------
+#   4 | 5 | 6
+#   ---------
+#   7 | 8 | 9 "
