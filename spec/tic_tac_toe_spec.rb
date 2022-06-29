@@ -126,3 +126,12 @@ describe 'displays the board!' do
     end
 end
 
+describe 'user input prompt'  do
+    it 'takes user input' do
+        board=Tictacboard.new()
+        puts input_prompt(board)
+        expect{input_prompt(board)}.to output("Player X: Which square would you like to play?\n").to_stdout
+        #puts input_prompt(board)
+    end
+end
+

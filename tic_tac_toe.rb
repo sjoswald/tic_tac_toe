@@ -70,3 +70,8 @@ def display(board)
   puts " ---------"
   puts " #{board.grid[6]} | #{board.grid[7]} | #{board.grid[8]}"
 end
+
+def input_prompt(board)
+  puts "Player #{current_player(board)}: Which square would you like to play?"
+  square_to_play = gets
+end
