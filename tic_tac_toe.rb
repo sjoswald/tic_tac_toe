@@ -14,6 +14,7 @@ class Tictacboard
       @grid[position-1] = player
     else
       print "Don't be silly! This square is taken.\n"
+      sleep (2)
     end
   end
 end
@@ -75,29 +76,47 @@ def display(board)
   puts " ---------"
   puts " #{board.grid[3]} | #{board.grid[4]} | #{board.grid[5]}"
   puts " ---------"
-  puts " #{board.grid[6]} | #{board.grid[7]} | #{board.grid[8]}"
+  puts " #{board.grid[6]} | #{board.grid[7]} | #{board.grid[8]}\n\n"
+end
+
+def sample_board
+  puts "\n 1 | 2 | 3"
+  puts " ---------"
+  puts " 4 | 5 | 6"
+  puts " ---------"
+  puts " 7 | 8 | 9\n\n"
 end
 
 def input_prompt(board)
   puts "Player #{current_player(board)}: Which square would you like to play?"
   square_to_play = gets.to_i
-  if (1..9).member?(square_to_play)
-    square_to_play
-  else
-    puts "No Player #{current_player(board)}! Pick a number between 1 and 9!"
-  end
 end
 
 def game(board)
-    board.player_mark(input_prompt(board), current_player(board))
-    display(board)
+  input = input_prompt(board)
+  if (1..9).member?(input)
+    board.player_mark(input, current_player(board))
+  else
+    puts "No Player #{current_player(board)}! Pick a number between 1 and 9!"
+    sleep(2)
+  end
+  puts `clear`
+  puts sample_board()
+  display(board)
 end
 
-# initialise running game method when running this script
-if __FILE__ == $0
+def playing_the_game
+  puts `clear`
+  puts "Welcome to Tic Tac Toe! To play type in a number between 1 and 9!"
+  puts sample_board()
   board = Tictacboard.new
   display(board)
   while board_state_checker(board) == false
     game(board)
   end
+end
+
+# initialise running game method when running this script
+if __FILE__ == $0
+  playing_the_game()
 end

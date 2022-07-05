@@ -117,7 +117,7 @@ end
 describe 'displays the board!' do
     it 'prints the empty grid to the console' do
         board=Tictacboard.new()
-        board_view = "\n   |   |  \n ---------\n   |   |  \n ---------\n   |   |  \n"
+        board_view = "\n   |   |  \n ---------\n   |   |  \n ---------\n   |   |  \n\n"
         display(board)
         expect{display(board)}.to output(board_view).to_stdout
     end
