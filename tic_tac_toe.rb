@@ -1,7 +1,7 @@
 class Tictacboard
   attr_accessor :grid
 
-  def initialize (grid = [1, 2, 3, 4, 5, 6, 7, 8, 9] )
+  def initialize (grid = [" "] * 9)
       @grid = grid
   end
 
@@ -47,7 +47,7 @@ def board_state_checker(board)
     pos_2 = board.grid[win_combo[1]]
     pos_3 = board.grid[win_combo[2]]
 
-    if [pos_1, pos_2, pos_3].uniq.count == 1 
+    if ["X", "O"].member?(pos_1) && [pos_1, pos_2, pos_3].uniq.count == 1 
        print "Player #{pos_1} wins!\n"
     elsif turn_count(board) == 9
         tie_flag = true
@@ -73,5 +73,20 @@ end
 
 def input_prompt(board)
   puts "Player #{current_player(board)}: Which square would you like to play?"
-  square_to_play = gets
+  square_to_play = gets.to_i
+  if (1..9).member?(square_to_play)
+    square_to_play
+  else
+    puts "FFS Player #{current_player(board)}! Pick a number between 1 and 9!"
+  end
 end
+
+# def game
+# board is made
+# game starts
+# people take turns
+# check if they win
+# if not loop
+# end
+
+# initialisde running game method when running this script
