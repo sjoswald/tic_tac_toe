@@ -92,19 +92,6 @@ def input_prompt(board)
   square_to_play = gets.to_i
 end
 
-def game(board)
-  input = input_prompt(board)
-  if (1..9).member?(input)
-    board.player_mark(input, current_player(board))
-  else
-    puts "No Player #{current_player(board)}! Pick a number between 1 and 9!"
-    sleep(2)
-  end
-  puts `clear`
-  puts sample_board()
-  display(board)
-end
-
 def playing_the_game
   puts `clear`
   puts "Welcome to Tic Tac Toe! To play type in a number between 1 and 9!"
@@ -112,11 +99,24 @@ def playing_the_game
   board = Tictacboard.new
   display(board)
   while board_state_checker(board) == false
-    game(board)
+    input = input_prompt(board)
+    if (1..9).member?(input)
+      board.player_mark(input, current_player(board))
+    else
+      puts "No Player #{current_player(board)}! Pick a number between 1 and 9!"
+      sleep(2)
+    end
+    puts `clear`
+    puts sample_board()
+    display(board)
   end
 end
 
 # initialise running game method when running this script
 if __FILE__ == $0
   playing_the_game()
+  puts "Would you like to play again? (y/n)"
+  if gets.downcase == "y\n"
+    playing_the_game()
+  end
 end

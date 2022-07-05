@@ -130,8 +130,8 @@ describe 'user input prompt'  do
     end
 end
 
-describe 'playing the game' do
-    it 'works' do
-# Plan out this test
-    end
-end
+# describe 'playing the game' do
+#     it 'works' do
+#         expect (something good) to happen
+#     end
+# end
