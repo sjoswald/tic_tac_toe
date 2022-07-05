@@ -41,6 +41,7 @@ $win_conditions = [
 
 def board_state_checker(board)
   tie_flag = false
+  win_flag = false
   $win_conditions.each { |win_combo|
   
     pos_1 = board.grid[win_combo[0]]
@@ -49,6 +50,7 @@ def board_state_checker(board)
 
     if ["X", "O"].member?(pos_1) && [pos_1, pos_2, pos_3].uniq.count == 1 
        print "Player #{pos_1} wins!\n"
+       win_flag = true
     elsif turn_count(board) == 9
         tie_flag = true
     end
@@ -56,6 +58,11 @@ def board_state_checker(board)
    } 
    if tie_flag 
       print "It's a tie :(\n" 
+   end
+   if win_flag || tie_flag
+    return true
+   else 
+    return false
    end
 end
 
@@ -81,12 +88,16 @@ def input_prompt(board)
   end
 end
 
-# def game
-# board is made
-# game starts
-# people take turns
-# check if they win
-# if not loop
-# end
+def game(board)
+    board.player_mark(input_prompt(board), current_player(board))
+    display(board)
+end
 
 # initialise running game method when running this script
+if __FILE__ == $0
+  board = Tictacboard.new
+  display(board)
+  while board_state_checker(board) == false
+    game(board)
+  end
+end
