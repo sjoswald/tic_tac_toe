@@ -77,7 +77,7 @@ def input_prompt(board)
   if (1..9).member?(square_to_play)
     square_to_play
   else
-    puts "FFS Player #{current_player(board)}! Pick a number between 1 and 9!"
+    puts "No Player #{current_player(board)}! Pick a number between 1 and 9!"
   end
 end
 
