@@ -126,13 +126,12 @@ end
 describe 'user input prompt'  do
     it 'takes user input' do
         board=Tictacboard.new()
-        #expect{input_prompt(board)}.to output("Player X: Which square would you like to play?\n").to_stdout
         expect(input_prompt(board)).to be_between(1,9)
     end
 end
 
 describe 'playing the game' do
     it 'works' do
-        ??!! wtf
+# Plan out this test
     end
 end

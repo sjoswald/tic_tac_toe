@@ -89,4 +89,4 @@ end
 # if not loop
 # end
 
-# initialisde running game method when running this script
+# initialise running game method when running this script
