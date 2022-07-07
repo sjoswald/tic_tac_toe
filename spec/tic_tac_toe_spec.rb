@@ -56,44 +56,44 @@ end
 describe 'turn-tracking' do
     it 'knows when one turn has been played' do
         board=Tictacboard.new(["X", " ", " ", " ", " ", " ", " ", " ", " "])
-        expect(turn_count(board)).to eq(1)
+        expect(board.turn_count).to eq(1)
     end
 
     it 'knows when three turns have been played' do
         board=Tictacboard.new(["X", " ", "O", " ", " ", " ", "X", " ", " "])
-        expect(turn_count(board)).to eq(3)
+        expect(board.turn_count).to eq(3)
     end
     
     it 'knows when the board is full' do
         board=Tictacboard.new(["X", "X", "O", "O", "O", "X", "X", "X", "O"])
-        expect(turn_count(board)).to eq(9)
+        expect(board.turn_count).to eq(9)
     end
 end
 
 describe 'GAME-OVER' do
     it 'knows when player X won on the top row' do
         board=Tictacboard.new(["X", "X", "X", "O", " ", " ", "O", " ", " "])
-        expect{board_state_checker(board)}.to output("Player X wins!\n").to_stdout
+        expect{board.state_checker}.to output("Player X wins!\n").to_stdout
     end
 
     it 'knows when player O won on the first column' do
         board=Tictacboard.new(["O", "X", "X", "O", " ", " ", "O", " ", " "])
-        expect{board_state_checker(board)}.to output("Player O wins!\n").to_stdout
+        expect{board.state_checker}.to output("Player O wins!\n").to_stdout
     end
 
     it 'knows when player X won on the diagonal' do
         board=Tictacboard.new(["X", "O", "X", "O", "X", " ", "O", " ", "X"])
-        expect{board_state_checker(board)}.to output("Player X wins!\n").to_stdout
+        expect{board.state_checker}.to output("Player X wins!\n").to_stdout
     end
 
     it 'knows when player O won on the top row' do
         board=Tictacboard.new(["O", "O", "O", "X", " ", " ", "X", " ", " "])
-        expect{board_state_checker(board)}.to output("Player O wins!\n").to_stdout
+        expect{board.state_checker}.to output("Player O wins!\n").to_stdout
     end
 
     it 'knows when the board is full without a win' do
         board=Tictacboard.new(["X", "X", "O", "O", "O", "X", "X", "X", "O"])
-        expect{board_state_checker(board)}.to output("It's a tie :(\n").to_stdout
+        expect{board.state_checker}.to output("It's a tie :(\n").to_stdout
     end
 end     
 
@@ -118,8 +118,8 @@ describe 'displays the board!' do
     it 'prints the empty grid to the console' do
         board=Tictacboard.new()
         board_view = "\n   |   |  \n ---------\n   |   |  \n ---------\n   |   |  \n\n"
-        display(board)
-        expect{display(board)}.to output(board_view).to_stdout
+        board.display
+        expect{board.display}.to output(board_view).to_stdout
     end
 end
 

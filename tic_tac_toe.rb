@@ -17,66 +17,68 @@ class Tictacboard
       sleep (2)
     end
   end
-end
 
-def turn_count(board)
-  count = 0
-  board.grid.each { |square|
-    if square == 'X' || square == 'O'
-      count += 1
-    end
-  }
-  count
-end
+  def display
+      puts "\n #{@grid[0]} | #{@grid[1]} | #{@grid[2]}"
+      puts " ---------"
+      puts " #{@grid[3]} | #{@grid[4]} | #{@grid[5]}"
+      puts " ---------"
+      puts " #{@grid[6]} | #{@grid[7]} | #{@grid[8]}\n\n"
+  end
 
-$win_conditions = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [0, 4, 8],
-  [2, 5, 8],
-  [1, 4, 7],
-  [2, 4, 6]
-]
+  def turn_count
+    count = 0
+    @grid.each { |square|
+      if square == 'X' || square == 'O'
+        count += 1
+      end
+    }
+    count
+  end
 
-def board_state_checker(board)
-  tie_flag = false
-  win_flag = false
-  $win_conditions.each { |win_combo|
-  
-    pos_1 = board.grid[win_combo[0]]
-    pos_2 = board.grid[win_combo[1]]
-    pos_3 = board.grid[win_combo[2]]
-
-    if ["X", "O"].member?(pos_1) && [pos_1, pos_2, pos_3].uniq.count == 1 
-       print "Player #{pos_1} wins!\n"
-       win_flag = true
-    elsif turn_count(board) == 9
-        tie_flag = true
-    end
+  def state_checker
+      tie_flag = false
+      win_flag = false
+      win_conditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [0, 4, 8],
+        [2, 5, 8],
+        [1, 4, 7],
+        [2, 4, 6]
+      ]
+      win_conditions.each { |win_combo|
+      
+        pos_1 = @grid[win_combo[0]]
+        pos_2 = @grid[win_combo[1]]
+        pos_3 = @grid[win_combo[2]]
     
-   } 
-   if tie_flag 
-      print "It's a tie :(\n" 
-   end
-   if win_flag || tie_flag
-    return true
-   else 
-    return false
-   end
+        if ["X", "O"].member?(pos_1) && [pos_1, pos_2, pos_3].uniq.count == 1 
+            print "Player #{pos_1} wins!\n"
+            win_flag = true
+        elsif turn_count == 9 
+            tie_flag = true
+        end
+        
+        } 
+
+        if tie_flag == true && win_flag == false
+          print "It's a tie :(\n" 
+        end
+
+        if win_flag || tie_flag
+        return true
+        else 
+        return false
+        end
+    end
+
 end
 
 def current_player(board)
-  turn_count(board) % 2 == 0 ? "X" : "O"
-end
-
-def display(board)
-  puts "\n #{board.grid[0]} | #{board.grid[1]} | #{board.grid[2]}"
-  puts " ---------"
-  puts " #{board.grid[3]} | #{board.grid[4]} | #{board.grid[5]}"
-  puts " ---------"
-  puts " #{board.grid[6]} | #{board.grid[7]} | #{board.grid[8]}\n\n"
+  board.turn_count % 2 == 0 ? "X" : "O"
 end
 
 def sample_board
@@ -97,8 +99,8 @@ def playing_the_game
   puts "Welcome to Tic Tac Toe! To play type in a number between 1 and 9!"
   puts sample_board()
   board = Tictacboard.new
-  display(board)
-  while board_state_checker(board) == false
+  board.display
+  while board.state_checker == false
     input = input_prompt(board)
     if (1..9).member?(input)
       board.player_mark(input, current_player(board))
@@ -108,7 +110,7 @@ def playing_the_game
     end
     puts `clear`
     puts sample_board()
-    display(board)
+    board.display
   end
 end
 
