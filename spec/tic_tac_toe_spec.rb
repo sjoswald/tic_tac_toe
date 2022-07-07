@@ -100,17 +100,17 @@ end
 describe 'taking turns' do
     it 'can produce next player symbol' do
         board=Tictacboard.new()
-        expect(current_player(board)).to eq("X")
+        expect(board.current_player).to eq("X")
     end
 
     it 'can produce next player symbol' do
         board=Tictacboard.new(["O", "X", "X", "O", " ", " ", " ", " ", " "])
-        expect(current_player(board)).to eq("X")
+        expect(board.current_player).to eq("X")
     end
 
     it 'can produce next player symbol' do
         board=Tictacboard.new(["O", "X", "X", "O", " ", " ", "X", " ", " "])
-        expect(current_player(board)).to eq("O")
+        expect(board.current_player).to eq("O")
     end
 end
 
@@ -129,9 +129,3 @@ describe 'user input prompt'  do
         expect(input_prompt(board)).to be_between(1,9)
     end
 end
-
-# describe 'playing the game' do
-#     it 'works' do
-#         expect (something good) to happen
-#     end
-# end

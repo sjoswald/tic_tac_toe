@@ -36,6 +36,10 @@ class Tictacboard
     count
   end
 
+  def current_player
+    turn_count % 2 == 0 ? "X" : "O"
+  end
+
   def state_checker
       tie_flag = false
       win_flag = false
@@ -74,51 +78,52 @@ class Tictacboard
         return false
         end
     end
-
 end
 
-def current_player(board)
-  board.turn_count % 2 == 0 ? "X" : "O"
-end
+class Gameplay
+  
+  def input_prompt(board)
+    puts "Player #{board.current_player}: Which square would you like to play?"
+    square_to_play = gets.to_i
+  end
 
-def sample_board
-  puts "\n 1 | 2 | 3"
-  puts " ---------"
-  puts " 4 | 5 | 6"
-  puts " ---------"
-  puts " 7 | 8 | 9\n\n"
-end
-
-def input_prompt(board)
-  puts "Player #{current_player(board)}: Which square would you like to play?"
-  square_to_play = gets.to_i
-end
-
-def playing_the_game
-  puts `clear`
-  puts "Welcome to Tic Tac Toe! To play type in a number between 1 and 9!"
-  puts sample_board()
-  board = Tictacboard.new
-  board.display
-  while board.state_checker == false
-    input = input_prompt(board)
-    if (1..9).member?(input)
-      board.player_mark(input, current_player(board))
-    else
-      puts "No Player #{current_player(board)}! Pick a number between 1 and 9!"
-      sleep(2)
-    end
+  def playing_the_game
     puts `clear`
-    puts sample_board()
+    puts "Welcome to Tic Tac Toe! To play type in a number between 1 and 9!"
+    puts "\n 1 | 2 | 3"
+    puts " ---------"
+    puts " 4 | 5 | 6"
+    puts " ---------"
+    puts " 7 | 8 | 9\n\n"
+    board = Tictacboard.new
     board.display
+    while board.state_checker == false
+      input = input_prompt(board)
+      if (1..9).member?(input)
+        board.player_mark(input, board.current_player)
+      else
+        puts "No Player #{board.current_player}! Pick a number between 1 and 9!"
+        sleep(2)
+      end
+      puts `clear`
+      puts "\n 1 | 2 | 3"
+      puts " ---------"
+      puts " 4 | 5 | 6"
+      puts " ---------"
+      puts " 7 | 8 | 9\n\n"
+      board.display
+    end
+  end
+
+  def new_game
+    playing_the_game()
+    puts "Would you like to play again? (y/n)"
+    if gets.downcase == "y\n"
+      new_game()
+    end
   end
 end
 
-# initialise running game method when running this script
-if __FILE__ == $0
-  playing_the_game()
-  puts "Would you like to play again? (y/n)"
-  if gets.downcase == "y\n"
-    playing_the_game()
+  if __FILE__ == $0
+     Gameplay.new().new_game()
   end
-end
