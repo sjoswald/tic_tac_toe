@@ -124,6 +124,6 @@ class Gameplay
   end
 end
 
-  if __FILE__ == $0
-     Gameplay.new().new_game()
-  end
+if __FILE__ == $0
+    Gameplay.new().new_game()
+end
